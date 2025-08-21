@@ -1,0 +1,78 @@
+{
+  "postacie": [
+    {
+      "tytul": "Kapitan Widmo",
+      "opis": "Przeklęty strażnik Serca Oceanu, na zawsze związany ze skarbem i swoim upiornym statkiem, 'Ciszą'. Nie jest bezmyślnym potworem, a istotą pełną bólu i wściekłości. Jego głos rozbrzmiewa bezpośrednio w umysłach, jest zimny i pełen pogardy. Zwykła broń nie jest w stanie go zranić.",
+      "url_zdjecia": "./images/kapitan_widmo.png"
+    },
+    {
+      "tytul": "Szkutnik Trybik",
+      "opis": "Zrzędliwy, ale genialny gnom-mechanik, jedyny prawdziwy szkutnik w Zatoce Wraka. Choć wiecznie narzeka, jest pasjonatem swojego rzemiosła. Może ulepszyć statek graczy, jeśli zapłacą mu złotem lub wyświadczą przysługę.",
+      "url_zdjecia": "./images/szkutnik_trybik.png"
+    },
+    {
+      "tytul": "Lord Harrington",
+      "opis": "Chełpliwy arystokrata i nałogowy hazardzista, który wszedł w posiadanie drugiego fragmentu mapy do Serca Oceanu. Jest tchórzem, a jego ego łatwo zmanipulować schlebstwami, grą w karty lub obietnicą egzotycznej przygody.",
+      "url_zdjecia": "./images/lord_harrington.png"
+    },
+    {
+      "tytul": "Wieszczka Tia",
+      "opis": "Tajemnicza kapłanka voodoo z Zatoki Wraka, strażniczka wiedzy i potężnych artefaktów. Nie interesuje jej złoto, a 'równowaga' w losie. Pomaga tym, którzy są gotowi zapłacić odpowiednią, często symboliczną cenę. Mówi zagadkami i zdaje się wiedzieć więcej, niż ujawnia.",
+      "url_zdjecia": "./images/wieszczka_tia.png"
+    },
+    {
+      "tytul": "La Víbora",
+      "opis": "Charyzmatyczna, lecz zdradziecka kapitan piratów, która jest główną rywalką graczy w wyścigu do skarbu. Jest mistrzynią manipulacji, walczącą z zabójczą gracją dwoma rapierami. Szanuje siłę i spryt, ale gardzi naiwnością. Może zaproponować sojusz, by zdradzić w najmniej spodziewanym momencie.",
+      "url_zdjecia": "./images/la_vibora.png"
+    }
+  ],
+  "przedmioty": [
+    {
+      "tytul": "Serce Oceanu",
+      "opis": "Legendarny artefakt Króla Korsarzy, Henry'ego Morgana. To nie złoto, a potężny klejnot pozwalający kontrolować pogodę i morskie prądy. Ten, kto go posiądzie, zostanie niekwestionowanym władcą mórz.",
+      "url_zdjecia": "./images/serce_oceanu.png"
+    },
+    {
+      "tytul": "Kompas Astralny",
+      "opis": "Magiczny kompas, który nie działa na zasadzie magnetyzmu, a wskazuje drogę do przeznaczenia. To jedyny przedmiot, który pozwala na nawigację wewnątrz nienaturalnego Całunu Mgieł, gdzie zwykłe kompasy wariują.",
+      "url_zdjecia": "./images/kompas_astralny.png"
+    },
+    {
+      "tytul": "Ostrze Srebrnego Ognia",
+      "opis": "Specjalna broń wykuta z 'nawiedzonego' srebra z zatopionej kopalni i zahartowana w ogniu wulkanu. Jej ostrze lśni srebrnym blaskiem i jest jedyną rzeczą, która może fizycznie zranić Kapitana Widmo i jego upiorną załogę.",
+      "url_zdjecia": "./images/ostrze_srebrnego_ognia.png"
+    },
+    {
+      "tytul": "Mapa na Ludzkiej Skórze",
+      "opis": "Mapa do Serca Oceanu, podzielona na trzy fragmenty, z których każdy jest narysowany na kawałku ludzkiej skóry. Poszczególne części są ukryte w niebezpiecznych miejscach i strzeżone przez sekrety przeszłości.",
+      "url_zdjecia": "./images/mapa_na_ludzkiej_skorze.png"
+    }
+  ],
+  "lokacje": [
+    {
+      "tytul": "Twierdza Króla Korsarzy",
+      "opis": "Ostatnia kryjówka Henry'ego 'Lewiatana' Morgana, ukryta w sercu wulkanicznej wyspy. To tutaj, w sali tronowej, spoczywa Serce Oceanu, strzeżone przez Kapitana Widmo i jego całą załogę.",
+      "url_zdjecia": "./images/twierdza_krola_korsarzy.png"
+    },
+    {
+      "tytul": "Wyspa Czaszek",
+      "opis": "Zapomniana wyspa, której linia brzegowa przypomina ludzką czaszkę. W jej wnętrzu znajduje się starożytna świątynia pełna pułapek i zagadek, strzegąca ostatniego sekretu mapy. To miejsce próby umysłu, siły i ducha.",
+      "url_zdjecia": "./images/wyspa_czaszek.png"
+    },
+    {
+      "tytul": "Tawerna Pod Zalanym Szczurem",
+      "opis": "Najsłynniejsza speluna w Tortudze, gdzie rozpoczyna się wiele przygód. Miejsce pełne pijanych marynarzy, szemranych handlarzy i plotek, które mogą prowadzić do największych skarbów lub na dno morza.",
+      "url_zdjecia": "./images/tawerna_pod_zalanym_szczurem.png"
+    },
+    {
+      "tytul": "Całun Mgieł",
+      "opis": "Obszar wiecznej, nienaturalnej mgły, gdzie nawigacja jest niemal niemożliwa, a zwykłe kompasy zawodzą. To zdradzieckie wody, w których poluje Kapitan Widmo i jego upiorny statek 'Cisza'.",
+      "url_zdjecia": "./images/calun_mgiel.png"
+    },
+    {
+      "tytul": "Wrak Statku Syrena",
+      "opis": "Statek kapitana Eliasa Vance'a, który zatonął u wybrzeży Skał Szepczących, ścigany przez Kapitana Widmo. W jego wnętrzu, pośród ciszy i morskich stworzeń, ukryty jest pierwszy fragment mapy do Serca Oceanu.",
+      "url_zdjecia": "./images/wrak_statku_syrena.png"
+    }
+  ]
+}

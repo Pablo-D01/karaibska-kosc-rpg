@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator Postaci - Karaibska Kość</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+        font-family: "Lato", sans-serif;
+        background-color: #1a2634;
+        color: #f0e5d8;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M-10 10c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="%23f0e5d8" fill-opacity="0.04" fill-rule="evenodd"/%3E%3C/svg%3E');
+      }
+      .container {
+        max-width: 800px;
+        width: 100%;
+        background-color: rgba(12, 24, 36, 0.7);
+        border: 2px solid #c8b7a6;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      h1 {
+        font-family: "Cinzel", serif;
+        font-size: 2.2em;
+        text-align: center;
+        color: #f0e5d8;
+        margin: 0 0 10px 0;
+        text-shadow: 2px 2px 5px #000;
+      }
+      h2 {
+        font-family: "Cinzel", serif;
+        text-align: center;
+        color: #c8b7a6;
+        border-bottom: 1px solid #c8b7a6;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+      }
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #c8b7a6;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #c8b7a6;
+      }
+      input[type="text"],
+      select,
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #c8b7a6;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: rgba(12, 24, 36, 0.8);
+        color: #f0e5d8;
+        font-size: 1em;
+      }
+      input[type="number"] {
+        width: 80px;
+        text-align: center;
+      }
+      .attribute-row,
+      .skill-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 5px;
+        border-bottom: 1px solid rgba(200, 183, 166, 0.2);
+      }
+      .points-tracker {
+        text-align: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        margin: 20px 0;
+        padding: 10px;
+        background-color: rgba(200, 183, 166, 0.1);
+        border: 1px solid #c8b7a6;
+        border-radius: 5px;
+      }
+      .stats-display {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        background: rgba(12, 24, 36, 0.8);
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #c8b7a6;
+      }
+      .stat-box h3 {
+        margin: 0 0 5px 0;
+        font-size: 1em;
+        color: #c8b7a6;
+      }
+      .stat-box p {
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      button {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #5a3e2b;
+        color: #f0e5d8;
+        border: 2px solid #c8b7a6;
+        border-radius: 5px;
+        font-size: 1.2em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      button:hover {
+        background-color: #c8b7a6;
+        color: #5a3e2b;
+      }
+
+      @media (min-width: 600px) {
+        .stats-display {
+          flex-direction: row;
+          justify-content: space-around;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏴‍☠️ Generator Postaci</h1>
+      <a href="index.html" class="back-link">← Powrót do strony głównej</a>
+      <div class="section" id="character-info">
+        <h2>Dane Postaci</h2>
+        <div class="form-group">
+          <label for="char-name">Imię / Ksywka:</label>
+          <input type="text" id="char-name" placeholder="np. 'Jednooki' Jack" />
+        </div>
+        <div class="form-group">
+          <label for="char-concept">Koncept Postaci:</label>
+          <input
+            type="text"
+            id="char-concept"
+            placeholder="np. Były oficer marynarki szukający zemsty"
+          />
+        </div>
+      </div>
+      <div class="section">
+        <h2>Atrybuty</h2>
+        <div class="attribute-row">
+          <label for="sila">Siła:</label
+          ><select id="sila" class="attribute-select"></select>
+        </div>
+        <div class="attribute-row">
+          <label for="zrecznosc">Zręczność:</label
+          ><select id="zrecznosc" class="attribute-select"></select>
+        </div>
+        <div class="attribute-row">
+          <label for="spryt">Spryt:</label
+          ><select id="spryt" class="attribute-select"></select>
+        </div>
+        <div class="attribute-row">
+          <label for="charyzma">Charyzma:</label
+          ><select id="charyzma" class="attribute-select"></select>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Umiejętności</h2>
+        <div class="points-tracker">
+          Pozostałe punkty umiejętności: <span id="skill-points">10</span>
+        </div>
+        <div class="skill-row">
+          <span>Bijatyka (Siła)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Bijatyka"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Krzepa (Siła)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Krzepa"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Pływanie (Siła)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Pływanie"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Zastraszanie (Siła)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Zastraszanie"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Fechtunek (Zręczność)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Fechtunek"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Strzelectwo (Zręczność)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Strzelectwo"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Uniki (Zręczność)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Uniki"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Zwinne Dłonie (Zręczność)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Zwinne Dłonie"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Nawigacja (Spryt)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Nawigacja"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Percepcja (Spryt)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Percepcja"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Wiedza o Morzu (Spryt)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Wiedza o Morzu"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Medycyna (Spryt)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Medycyna"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Dowodzenie (Charyzma)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Dowodzenie"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Perswazja (Charyzma)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Perswazja"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Kłamstwo (Charyzma)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Kłamstwo"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+        <div class="skill-row">
+          <span>Hazard (Charyzma)</span
+          ><input
+            type="number"
+            class="skill-input"
+            data-skill="Hazard"
+            min="0"
+            max="3"
+            value="0"
+          />
+        </div>
+      </div>
+      <div class="section">
+        <h2>Cechy Bojowe</h2>
+        <div class="stats-display">
+          <div class="stat-box">
+            <h3>Punkty Fartu (PF)</h3>
+            <p id="pf-value">10</p>
+          </div>
+          <div class="stat-box">
+            <h3>Obrona</h3>
+            <p id="obrona-value">8</p>
+          </div>
+          <div class="stat-box">
+            <h3>Próg Bólu</h3>
+            <p id="prog-bolu-value">5</p>
+          </div>
+        </div>
+      </div>
+      <button id="download-pdf">Pobierz Kartę Postaci (PDF)</button>
+    </div>
+    <script>
+      // Skrypt JavaScript pozostaje bez zmian
+      document.addEventListener("DOMContentLoaded", function () {
+        const attributeValues = [3, 2, 1, 0];
+        const attributeSelects = document.querySelectorAll(".attribute-select");
+        const skillInputs = document.querySelectorAll(".skill-input");
+        const skillPointsSpan = document.getElementById("skill-points");
+        const maxSkillPoints = 10;
+        function populateAttributeOptions() {
+          const selectedValues = Array.from(attributeSelects).map((s) =>
+            s.value ? parseInt(s.value) : null
+          );
+          attributeSelects.forEach((select) => {
+            const currentValue = select.value ? parseInt(select.value) : null;
+            let options = `<option value="">Wybierz...</option>`;
+            attributeValues.forEach((val) => {
+              const isSelected = val === currentValue;
+              const isDisabled = selectedValues.includes(val) && !isSelected;
+              options += `<option value="${val}" ${
+                isSelected ? "selected" : ""
+              } ${isDisabled ? "disabled" : ""}>+${val}</option>`;
+            });
+            select.innerHTML = options;
+          });
+          updateCombatStats();
+        }
+        function updateCombatStats() {
+          const sila = parseInt(document.getElementById("sila").value) || 0;
+          const zrecznosc =
+            parseInt(document.getElementById("zrecznosc").value) || 0;
+          const pf = 10 + sila;
+          const obrona = 8 + zrecznosc;
+          const progBolu = Math.ceil(pf / 2);
+          document.getElementById("pf-value").textContent = pf;
+          document.getElementById("obrona-value").textContent = obrona;
+          document.getElementById("prog-bolu-value").textContent = progBolu;
+        }
+        function updateSkillPoints() {
+          let totalPoints = 0;
+          skillInputs.forEach((input) => {
+            totalPoints += parseInt(input.value);
+          });
+          const remainingPoints = maxSkillPoints - totalPoints;
+          skillPointsSpan.textContent = remainingPoints;
+          skillPointsSpan.style.color = remainingPoints < 0 ? "red" : "inherit";
+          skillInputs.forEach((input) => {
+            input.disabled =
+              remainingPoints <= 0 && parseInt(input.value) === 0;
+          });
+        }
+        attributeSelects.forEach((select) =>
+          select.addEventListener("change", populateAttributeOptions)
+        );
+        skillInputs.forEach((input) =>
+          input.addEventListener("input", updateSkillPoints)
+        );
+        function normalizeText(text) {
+          const polishChars = {
+            ą: "a",
+            ć: "c",
+            ę: "e",
+            ł: "l",
+            ń: "n",
+            ó: "o",
+            ś: "s",
+            ź: "z",
+            ż: "z",
+            Ą: "A",
+            Ć: "C",
+            Ę: "E",
+            Ł: "L",
+            Ń: "N",
+            Ó: "O",
+            Ś: "S",
+            Ź: "Z",
+            Ż: "Z",
+          };
+          return text.replace(
+            /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g,
+            (match) => polishChars[match]
+          );
+        }
+        document
+          .getElementById("download-pdf")
+          .addEventListener("click", function () {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const charName = normalizeText(
+              document.getElementById("char-name").value || "Bezimienny Pirat"
+            );
+            const charConcept = normalizeText(
+              document.getElementById("char-concept").value || "Brak opisu"
+            );
+            const attrs = {
+              sila: document.getElementById("sila").value || "0",
+              zrecznosc: document.getElementById("zrecznosc").value || "0",
+              spryt: document.getElementById("spryt").value || "0",
+              charyzma: document.getElementById("charyzma").value || "0",
+            };
+            const stats = {
+              pf: document.getElementById("pf-value").textContent,
+              obrona: document.getElementById("obrona-value").textContent,
+              progBolu: document.getElementById("prog-bolu-value").textContent,
+            };
+            doc.setFontSize(24);
+            doc.text(normalizeText("Karta Postaci - Karaibska Kość"), 105, 20, {
+              align: "center",
+            });
+            doc.setLineWidth(0.5);
+            doc.line(15, 25, 195, 25);
+            doc.setFontSize(12);
+            doc.setLineWidth(0.2);
+            doc.rect(15, 30, 180, 20);
+            doc.text(normalizeText("Imię / Ksywka:"), 20, 38);
+            doc.text(charName, 55, 38);
+            doc.text(normalizeText("Koncept Postaci:"), 20, 46);
+            doc.text(charConcept, 55, 46);
+            const col1X = 15;
+            const col2X = 110;
+            doc.setFontSize(16);
+            doc.text(normalizeText("Atrybuty"), col1X, 65);
+            doc.rect(col1X, 70, 85, 35);
+            doc.setFontSize(12);
+            doc.text(normalizeText("Siła:"), col1X + 5, 78);
+            doc.text(normalizeText("Zręczność:"), col1X + 5, 86);
+            doc.text(normalizeText("Spryt:"), col1X + 5, 94);
+            doc.text(normalizeText("Charyzma:"), col1X + 5, 102);
+            doc.text(`+${attrs.sila}`, col1X + 35, 78);
+            doc.text(`+${attrs.zrecznosc}`, col1X + 35, 86);
+            doc.text(`+${attrs.spryt}`, col1X + 35, 94);
+            doc.text(`+${attrs.charyzma}`, col1X + 35, 102);
+            doc.setFontSize(16);
+            doc.text(normalizeText("Cechy Bojowe"), col2X, 65);
+            doc.rect(col2X, 70, 85, 35);
+            doc.setFontSize(12);
+            doc.text(normalizeText("Punkty Fartu (PF):"), col2X + 5, 78);
+            doc.text(normalizeText("Obrona:"), col2X + 5, 86);
+            doc.text(normalizeText("Próg Bólu:"), col2X + 5, 94);
+            doc.text(normalizeText("Punkty Brawury:"), col2X + 5, 102);
+            doc.text(stats.pf, col2X + 50, 78);
+            doc.text(stats.obrona, col2X + 50, 86);
+            doc.text(stats.progBolu, col2X + 50, 94);
+            doc.text("3", col2X + 50, 102);
+            doc.setFontSize(16);
+            doc.text(normalizeText("Umiejętności"), col1X, 120);
+            doc.rect(col1X, 125, 180, 100);
+            doc.setFontSize(10);
+            let yPos = 132;
+            let currentX = col1X + 5;
+            const columnWidth = 45;
+            skillInputs.forEach((input) => {
+              const skillValue = parseInt(input.value);
+              if (skillValue > 0) {
+                const skillName = normalizeText(input.dataset.skill);
+                doc.text(`${skillName}: +${skillValue}`, currentX, yPos);
+                yPos += 7;
+                if (yPos > 220) {
+                  yPos = 132;
+                  currentX += columnWidth;
+                }
+              }
+            });
+            doc.setFontSize(16);
+            doc.text(normalizeText("Ekwipunek i Notatki"), col1X, 240);
+            doc.rect(col1X, 245, 180, 40);
+            doc.setLineDashPattern([1, 1], 0);
+            doc.line(col1X + 5, 255, 190, 255);
+            doc.line(col1X + 5, 265, 190, 265);
+            doc.line(col1X + 5, 275, 190, 275);
+            doc.save(`${charName.replace(/\s/g, "_")}_karta.pdf`);
+          });
+        populateAttributeOptions();
+        updateSkillPoints();
+      });
+    </script>
+  </body>
+</html>

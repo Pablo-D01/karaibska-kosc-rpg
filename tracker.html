@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karaibska Kość - Tracker Inicjatywy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+        background-color: #1a2634;
+        color: #f0e5d8;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M-10 10c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="%23f0e5d8" fill-opacity="0.04" fill-rule="evenodd"/%3E%3C/svg%3E');
+      }
+      .container {
+        max-width: 600px;
+        width: 100%;
+        background-color: rgba(12, 24, 36, 0.7);
+        border: 2px solid #c8b7a6;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+      }
+      h1 {
+        font-family: "Cinzel", serif;
+        text-align: center;
+        color: #f0e5d8;
+        margin: 0 0 10px 0;
+        text-shadow: 2px 2px 5px #000;
+        font-size: 2.2em;
+      }
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #c8b7a6;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      .add-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .add-form input {
+        padding: 10px;
+        border: 1px solid #c8b7a6;
+        border-radius: 4px;
+        background-color: rgba(12, 24, 36, 0.8);
+        color: #f0e5d8;
+        font-size: 1em;
+      }
+      .add-form button {
+        padding: 10px 15px;
+        background-color: #5a3e2b;
+        color: #f0e5d8;
+        border: 2px solid #c8b7a6;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1em;
+      }
+      .add-form button:hover {
+        background-color: #c8b7a6;
+        color: #5a3e2b;
+      }
+      #tracker-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .tracker-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: rgba(200, 183, 166, 0.1);
+        border: 1px solid transparent;
+        border-radius: 4px;
+        margin-bottom: 5px;
+        transition: all 0.3s ease;
+      }
+      .tracker-item.active {
+        border-color: #f0e5d8;
+        background-color: rgba(90, 62, 43, 0.5);
+      }
+      .item-name {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      .item-initiative {
+        font-size: 1.3em;
+        font-family: "Cinzel", serif;
+      }
+      .item-remove {
+        background: none;
+        border: none;
+        color: #c8b7a6;
+        cursor: pointer;
+        font-size: 1.2em;
+      }
+      .item-remove:hover {
+        color: #f0e5d8;
+      }
+      .controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .controls button {
+        flex-grow: 1;
+        padding: 15px;
+        font-size: 1.1em;
+        font-weight: bold;
+        background-color: transparent;
+        color: #c8b7a6;
+        border: 2px solid #5a3e2b;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .controls button:hover {
+        background-color: #5a3e2b;
+        color: #f0e5d8;
+      }
+      .controls .start-button {
+        background-color: #5a3e2b;
+        color: #f0e5d8;
+      }
+      .controls .start-button:hover {
+        background-color: #c8b7a6;
+        color: #5a3e2b;
+      }
+
+      @media (min-width: 600px) {
+        .add-form {
+          flex-direction: row;
+        }
+        .add-form input[type="number"] {
+          width: 80px;
+          flex-grow: 0;
+        }
+        .controls {
+          flex-direction: row;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚔️ Tracker Inicjatywy</h1>
+      <a href="index.html" class="back-link">← Powrót do strony głównej</a>
+      <div class="add-form">
+        <input
+          type="text"
+          id="char-name"
+          placeholder="Imię postaci lub wroga..."
+        />
+        <input type="number" id="char-initiative" placeholder="Inicj." />
+        <button id="add-char-btn">Dodaj</button>
+      </div>
+      <ul id="tracker-list"></ul>
+      <div class="controls">
+        <button id="start-btn" class="start-button">Rozpocznij Walkę</button>
+        <button id="next-btn" disabled>Następna Tura</button>
+        <button id="reset-btn">Resetuj</button>
+      </div>
+    </div>
+    <script>
+      // Skrypt JavaScript pozostaje bez zmian
+      document.addEventListener("DOMContentLoaded", () => {
+        const nameInput = document.getElementById("char-name");
+        const initiativeInput = document.getElementById("char-initiative");
+        const addButton = document.getElementById("add-char-btn");
+        const trackerList = document.getElementById("tracker-list");
+        const startButton = document.getElementById("start-btn");
+        const nextButton = document.getElementById("next-btn");
+        const resetButton = document.getElementById("reset-btn");
+        let combatants = [];
+        let currentIndex = -1;
+        let combatStarted = false;
+        function renderList() {
+          trackerList.innerHTML = "";
+          combatants.forEach((char, index) => {
+            const li = document.createElement("li");
+            li.className = "tracker-item";
+            if (index === currentIndex) {
+              li.classList.add("active");
+            }
+            li.dataset.id = char.id;
+            li.innerHTML = `<span class="item-name">${char.name}</span><span class="item-initiative">${char.initiative}</span><button class="item-remove" title="Usuń postać">✖</button>`;
+            trackerList.appendChild(li);
+          });
+        }
+        function sortCombatants() {
+          combatants.sort((a, b) => b.initiative - a.initiative);
+        }
+        function addCombatant() {
+          const name = nameInput.value.trim();
+          const initiative = parseInt(initiativeInput.value);
+          if (name && !isNaN(initiative)) {
+            combatants.push({ id: Date.now(), name, initiative });
+            sortCombatants();
+            if (combatStarted && currentIndex > -1) {
+              const activeCombatantId =
+                trackerList.querySelector(".active")?.dataset.id;
+              currentIndex = combatants.findIndex(
+                (c) => c.id == activeCombatantId
+              );
+            }
+            renderList();
+            nameInput.value = "";
+            initiativeInput.value = "";
+            nameInput.focus();
+          }
+        }
+        function startCombat() {
+          if (combatants.length > 0) {
+            combatStarted = true;
+            currentIndex = 0;
+            startButton.disabled = true;
+            nextButton.disabled = false;
+            renderList();
+          }
+        }
+        function nextTurn() {
+          if (combatStarted) {
+            currentIndex = (currentIndex + 1) % combatants.length;
+            renderList();
+          }
+        }
+        function resetCombat() {
+          combatants = [];
+          currentIndex = -1;
+          combatStarted = false;
+          startButton.disabled = false;
+          nextButton.disabled = true;
+          renderList();
+        }
+        addButton.addEventListener("click", addCombatant);
+        initiativeInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") addCombatant();
+        });
+        trackerList.addEventListener("click", (e) => {
+          if (e.target.classList.contains("item-remove")) {
+            const idToRemove = parseInt(e.target.parentElement.dataset.id);
+            combatants = combatants.filter((c) => c.id !== idToRemove);
+            if (combatStarted && currentIndex > -1) {
+              const activeCombatantId =
+                trackerList.querySelector(".active")?.dataset.id;
+              if (activeCombatantId) {
+                currentIndex = combatants.findIndex(
+                  (c) => c.id == activeCombatantId
+                );
+                if (currentIndex === -1 && combatants.length > 0) {
+                  currentIndex = 0;
+                }
+              } else if (combatants.length > 0) {
+                currentIndex = 0;
+              } else {
+                resetCombat();
+              }
+            }
+            renderList();
+          }
+        });
+        startButton.addEventListener("click", startCombat);
+        nextButton.addEventListener("click", nextTurn);
+        resetButton.addEventListener("click", resetCombat);
+      });
+    </script>
+  </body>
+</html>
