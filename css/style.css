@@ -1,0 +1,308 @@
+/* --- Style Globalne --- */
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #1a2634;
+  color: #f0e5d8;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M-10 10c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="%23f0e5d8" fill-opacity="0.04" fill-rule="evenodd"/%3E%3C/svg%3E');
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(12, 24, 36, 0.7);
+  border: 2px solid #c8b7a6;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: "Cinzel", serif;
+  text-align: center;
+  color: #f0e5d8;
+  text-shadow: 2px 2px 5px #000;
+  margin: 0 0 10px 0;
+}
+
+h1 {
+  font-size: 2.8em;
+}
+h2 {
+  font-size: 1.8em;
+  color: #c8b7a6;
+  border-bottom: 1px solid #c8b7a6;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #c8b7a6;
+  text-decoration: none;
+}
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* --- Strona Główna --- */
+.container-main {
+  max-width: 600px;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.nav-button {
+  display: block;
+  padding: 15px 20px;
+  background-color: #5a3e2b;
+  color: #f0e5d8;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #c8b7a6;
+  transition: all 0.3s ease;
+}
+.nav-button:hover {
+  background-color: #c8b7a6;
+  color: #5a3e2b;
+  transform: translateY(-3px);
+}
+.download-button {
+  background-color: transparent;
+  border-color: #5a3e2b;
+  color: #c8b7a6;
+}
+.download-button:hover {
+  background-color: #5a3e2b;
+  border-color: #c8b7a6;
+  color: #f0e5d8;
+}
+footer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 0.8em;
+  color: #c8b7a6;
+  opacity: 0.6;
+}
+
+/* --- Generator i Tracker --- */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #c8b7a6;
+}
+input[type="text"],
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c8b7a6;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: rgba(12, 24, 36, 0.8);
+  color: #f0e5d8;
+  font-size: 1em;
+}
+
+/* --- Wiki --- */
+#search-input {
+  width: 100%;
+  padding: 12px 20px;
+}
+#search-input::placeholder {
+  color: #c8b7a6;
+  opacity: 0.7;
+}
+.wiki-entry {
+  border: 1px solid #c8b7a6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.entry-header {
+  padding: 15px 20px;
+  cursor: pointer;
+  background-color: rgba(90, 62, 43, 0.3);
+  transition: background-color 0.3s ease;
+}
+.entry-header:hover {
+  background-color: rgba(200, 183, 166, 0.3);
+}
+.entry-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  border: none;
+  padding: 0;
+}
+.entry-body {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease-out, opacity 0.5s ease-out,
+    padding 0.5s ease-out;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.wiki-entry.active .entry-body {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 20px;
+}
+.entry-body img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 5px;
+  border: 2px solid #c8b7a6;
+  margin: 0 auto;
+}
+.entry-body p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1.1em;
+}
+
+/* --- Media Queries dla responsywności --- */
+@media (min-width: 768px) {
+  .entry-body {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .entry-body img {
+    margin: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .stats-display,
+  .controls,
+  .add-form {
+    flex-direction: row;
+  }
+  .add-form input[type="number"] {
+    width: 80px;
+    flex-grow: 0;
+  }
+}
+/* --- Dodatkowe style dla ekranu hasła w wiki.html --- */
+
+#password-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    26,
+    38,
+    52,
+    0.95
+  ); /* Ciemniejsze, półprzezroczyste tło */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+#password-overlay.hidden {
+  opacity: 0;
+  pointer-events: none; /* Wyłącza interakcje po ukryciu */
+}
+
+.password-box {
+  text-align: center;
+  padding: 30px 40px;
+  background-color: rgba(12, 24, 36, 0.8);
+  border: 2px solid #c8b7a6;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 400px;
+}
+
+.password-box h2 {
+  font-family: "Cinzel", serif;
+  font-size: 2em;
+  margin: 0 0 10px 0;
+  color: #f0e5d8;
+  border: none; /* Usuwamy podkreślenie z H2 w tym oknie */
+}
+
+.password-box p {
+  color: #c8b7a6;
+  margin: 0 0 25px 0;
+  font-size: 1.1em;
+}
+
+#password-input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1.1em;
+  background-color: rgba(12, 24, 36, 0.9);
+  border: 2px solid #c8b7a6;
+  border-radius: 5px;
+  color: #f0e5d8;
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#password-input::placeholder {
+  color: #c8b7a6;
+  opacity: 0.5;
+}
+
+#password-submit {
+  width: 100%;
+  padding: 15px 30px;
+  background-color: #5a3e2b;
+  color: #f0e5d8;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #c8b7a6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#password-submit:hover {
+  background-color: #c8b7a6;
+  color: #5a3e2b;
+}
+
+/* Klasa do animacji trzęsienia się */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* Ukrywamy główną zawartość na starcie */
+#main-content {
+  display: none;
+}

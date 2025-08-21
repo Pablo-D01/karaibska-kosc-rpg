@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karaibska Kość - Encyklopedia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <audio id="error-sound" src="img/README.mp3" preload="auto"></audio>
+
+    <div id="password-overlay">
+        <div class="password-box">
+            <h1>Piracka Encyklopedia</h1>
+            <p>Podaj hasło, by wejść.</p>
+            <input type="password" id="password-input" placeholder="•••••••">
+            <button id="password-submit">Wejdź</button>
+        </div>
+    </div>
+
+    <div class="container" id="main-content">
+        <header>
+            <h1>Piracka Encyklopedia</h1>
+            <a href="index.html" class="back-link">← Powrót do strony głównej</a>
+        </header>
+        <main>
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Wpisz, czego szukasz...">
+            </div>
+            <div id="wiki-container"></div>
+        </main>
+    </div>
+
+    <script src="js/wiki.js"></script>
+</body>
+</html>

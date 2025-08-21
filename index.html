@@ -10,124 +10,14 @@
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      /* --- Style pozostają bez zmian --- */
-      body {
-        margin: 0;
-        font-family: "Lato", sans-serif;
-        background-color: #1a2634;
-        color: #f0e5d8; /* Kolor pergaminu */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M-10 10c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm20 20c5.523 0 10-4.477 10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z" fill="%23f0e5d8" fill-opacity="0.04" fill-rule="evenodd"/%3E%3C/svg%3E');
-      }
-
-      .container {
-        text-align: center;
-        padding: 40px;
-        background-color: rgba(12, 24, 36, 0.7);
-        border: 2px solid #c8b7a6;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        max-width: 600px;
-        margin: 20px;
-      }
-
-      header h1 {
-        font-family: "Cinzel", serif;
-        font-size: 3.5em;
-        color: #f0e5d8;
-        margin: 0 0 10px 0;
-        text-shadow: 2px 2px 5px #000;
-        animation: fadeInDown 1s ease-out;
-      }
-
-      header p {
-        font-size: 1.2em;
-        margin: 0 0 30px 0;
-        color: #c8b7a6;
-        animation: fadeInUp 1s ease-out;
-      }
-
-      nav {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .nav-button {
-        display: block;
-        padding: 15px 30px;
-        background-color: #5a3e2b;
-        color: #f0e5d8;
-        text-decoration: none;
-        font-size: 1.2em;
-        font-weight: bold;
-        border-radius: 5px;
-        border: 2px solid #c8b7a6;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      }
-
-      .nav-button:hover {
-        background-color: #c8b7a6;
-        color: #5a3e2b;
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-      }
-
-      /* Dodatkowy styl dla przycisku pobierania, aby go wyróżnić */
-      .download-button {
-        background-color: transparent;
-        border-color: #5a3e2b;
-        color: #c8b7a6;
-      }
-
-      .download-button:hover {
-        background-color: #5a3e2b;
-        border-color: #c8b7a6;
-        color: #f0e5d8;
-      }
-
-      footer {
-        margin-top: 40px;
-        font-size: 0.9em;
-        color: #c8b7a6;
-        opacity: 0.6;
-      }
-
-      @keyframes fadeInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="container container-main">
       <header>
         <h1>🏴‍☠️ Karaibska Kość</h1>
         <p>Wypłyń na szerokie wody przygody!</p>
       </header>
-
       <main>
         <nav>
           <a href="generator.html" class="nav-button">Stwórz Postać</a>
@@ -138,7 +28,6 @@
           >
         </nav>
       </main>
-
       <footer>
         <p>&copy; 2025. System i kampania na potrzeby sesji RPG.</p>
       </footer>
