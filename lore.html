@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karaibska Kość - Dziennik Kapitański</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Dziennik Kapitański</h1>
+        <a href="index.html" class="back-link">← Powrót do strony głównej</a>
+      </header>
+      <main>
+        <div id="lore-container"></div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const loreContainer = document.getElementById("lore-container");
+
+        async function loadLore() {
+          try {
+            const response = await fetch("lore.json");
+            const data = await response.json();
+            displayEntries(data.wprowadzenie);
+          } catch (error) {
+            loreContainer.innerHTML =
+              '<p style="color: red;">Nie udało się załadować danych fabularnych.</p>';
+            console.error("Błąd wczytywania lore.json:", error);
+          }
+        }
+
+        function displayEntries(entries) {
+          loreContainer.innerHTML = "";
+          entries.forEach((entry) => {
+            const entryElement = document.createElement("div");
+            entryElement.className = "wiki-entry";
+            // Domyślnie rozwinięte przez dodanie klasy 'active'
+            entryElement.classList.add("active");
+            entryElement.innerHTML = `
+                        <div class="entry-header">
+                            <h2>${entry.tytul}</h2>
+                        </div>
+                        <div class="entry-body">
+                            <p>${entry.opis}</p>
+                        </div>
+                    `;
+            loreContainer.appendChild(entryElement);
+          });
+        }
+
+        loreContainer.addEventListener("click", (event) => {
+          const header = event.target.closest(".entry-header");
+          if (header) {
+            header.parentElement.classList.toggle("active");
+          }
+        });
+
+        loadLore();
+      });
+    </script>
+  </body>
+</html>

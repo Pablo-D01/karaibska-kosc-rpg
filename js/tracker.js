@@ -1,40 +1,96 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Karaibska Kość - Encyklopedia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-    <audio id="error-sound" src="img/README.mp3" preload="auto"></audio>
-
-    <div id="password-overlay">
-        <div class="password-box">
-            <h1>Piracka Encyklopedia</h1>
-            <p>Podaj hasło, by wejść.</p>
-            <input type="password" id="password-input" placeholder="•••••••">
-            <button id="password-submit">Wejdź</button>
-        </div>
-    </div>
-
-    <div class="container" id="main-content">
-        <header>
-            <h1>Piracka Encyklopedia</h1>
-            <a href="index.html" class="back-link">← Powrót do strony głównej</a>
-        </header>
-        <main>
-            <div id="search-container">
-                <input type="text" id="search-input" placeholder="Wpisz, czego szukasz...">
-            </div>
-            <div id="wiki-container"></div>
-        </main>
-    </div>
-
-    <script src="js/wiki.js"></script>
-</body>
-</html>
+document.addEventListener("DOMContentLoaded", () => {
+  const nameInput = document.getElementById("char-name");
+  const initiativeInput = document.getElementById("char-initiative");
+  const addButton = document.getElementById("add-char-btn");
+  const trackerList = document.getElementById("tracker-list");
+  const startButton = document.getElementById("start-btn");
+  const nextButton = document.getElementById("next-btn");
+  const resetButton = document.getElementById("reset-btn");
+  let combatants = [];
+  let currentIndex = -1;
+  let combatStarted = false;
+  function renderList() {
+    trackerList.innerHTML = "";
+    combatants.forEach((char, index) => {
+      const li = document.createElement("li");
+      li.className = "tracker-item";
+      if (index === currentIndex) {
+        li.classList.add("active");
+      }
+      li.dataset.id = char.id;
+      li.innerHTML = `<span class="item-name">${char.name}</span><span class="item-initiative">${char.initiative}</span><button class="item-remove" title="Usuń postać">✖</button>`;
+      trackerList.appendChild(li);
+    });
+  }
+  function sortCombatants() {
+    combatants.sort((a, b) => b.initiative - a.initiative);
+  }
+  function addCombatant() {
+    const name = nameInput.value.trim();
+    const initiative = parseInt(initiativeInput.value);
+    if (name && !isNaN(initiative)) {
+      combatants.push({ id: Date.now(), name, initiative });
+      sortCombatants();
+      if (combatStarted && currentIndex > -1) {
+        const activeCombatantId =
+          trackerList.querySelector(".active")?.dataset.id;
+        currentIndex = combatants.findIndex((c) => c.id == activeCombatantId);
+      }
+      renderList();
+      nameInput.value = "";
+      initiativeInput.value = "";
+      nameInput.focus();
+    }
+  }
+  function startCombat() {
+    if (combatants.length > 0) {
+      combatStarted = true;
+      currentIndex = 0;
+      startButton.disabled = true;
+      nextButton.disabled = false;
+      renderList();
+    }
+  }
+  function nextTurn() {
+    if (combatStarted) {
+      currentIndex = (currentIndex + 1) % combatants.length;
+      renderList();
+    }
+  }
+  function resetCombat() {
+    combatants = [];
+    currentIndex = -1;
+    combatStarted = false;
+    startButton.disabled = false;
+    nextButton.disabled = true;
+    renderList();
+  }
+  addButton.addEventListener("click", addCombatant);
+  initiativeInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") addCombatant();
+  });
+  trackerList.addEventListener("click", (e) => {
+    if (e.target.classList.contains("item-remove")) {
+      const idToRemove = parseInt(e.target.parentElement.dataset.id);
+      combatants = combatants.filter((c) => c.id !== idToRemove);
+      if (combatStarted && currentIndex > -1) {
+        const activeCombatantId =
+          trackerList.querySelector(".active")?.dataset.id;
+        if (activeCombatantId) {
+          currentIndex = combatants.findIndex((c) => c.id == activeCombatantId);
+          if (currentIndex === -1 && combatants.length > 0) {
+            currentIndex = 0;
+          }
+        } else if (combatants.length > 0) {
+          currentIndex = 0;
+        } else {
+          resetCombat();
+        }
+      }
+      renderList();
+    }
+  });
+  startButton.addEventListener("click", startCombat);
+  nextButton.addEventListener("click", nextTurn);
+  resetButton.addEventListener("click", resetCombat);
+});
