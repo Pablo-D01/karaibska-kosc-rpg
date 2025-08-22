@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const skillInputs = document.querySelectorAll(".skill-input");
   const skillPointsSpan = document.getElementById("skill-points");
   const maxSkillPoints = 10;
+
+  // Auto-rozszerzanie pola textarea
+  const conceptTextarea = document.getElementById("char-concept");
+  conceptTextarea.addEventListener("input", () => {
+    conceptTextarea.style.height = "auto";
+    conceptTextarea.style.height = conceptTextarea.scrollHeight + "px";
+  });
+
   function populateAttributeOptions() {
     const selectedValues = Array.from(attributeSelects).map((s) =>
       s.value ? parseInt(s.value) : null
@@ -22,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     updateCombatStats();
   }
+
   function updateCombatStats() {
     const sila = parseInt(document.getElementById("sila").value) || 0;
     const zrecznosc = parseInt(document.getElementById("zrecznosc").value) || 0;
@@ -32,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("obrona-value").textContent = obrona;
     document.getElementById("prog-bolu-value").textContent = progBolu;
   }
+
   function updateSkillPoints() {
     let totalPoints = 0;
     skillInputs.forEach((input) => {
@@ -44,12 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
       input.disabled = remainingPoints <= 0 && parseInt(input.value) === 0;
     });
   }
+
   attributeSelects.forEach((select) =>
     select.addEventListener("change", populateAttributeOptions)
   );
   skillInputs.forEach((input) =>
     input.addEventListener("input", updateSkillPoints)
   );
+
   function normalizeText(text) {
     const polishChars = {
       ą: "a",
@@ -73,17 +85,20 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     return text.replace(/[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/g, (match) => polishChars[match]);
   }
+
   document
     .getElementById("download-pdf")
     .addEventListener("click", function () {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+
       const charName = normalizeText(
         document.getElementById("char-name").value || "Bezimienny Pirat"
       );
       const charConcept = normalizeText(
         document.getElementById("char-concept").value || "Brak opisu"
       );
+
       const attrs = {
         sila: document.getElementById("sila").value || "0",
         zrecznosc: document.getElementById("zrecznosc").value || "0",
@@ -95,73 +110,98 @@ document.addEventListener("DOMContentLoaded", function () {
         obrona: document.getElementById("obrona-value").textContent,
         progBolu: document.getElementById("prog-bolu-value").textContent,
       };
+
+      // --- STRONA 1: STATYSTYKI ---
+
       doc.setFontSize(24);
-      doc.text(normalizeText("Karta Postaci - Karaibska Kość"), 105, 20, {
+      doc.text(normalizeText("Karta Postaci - Karaibska Kosc"), 105, 20, {
         align: "center",
       });
       doc.setLineWidth(0.5);
       doc.line(15, 25, 195, 25);
       doc.setFontSize(12);
-      doc.setLineWidth(0.2);
-      doc.rect(15, 30, 180, 20);
-      doc.text(normalizeText("Imię / Ksywka:"), 20, 38);
+      doc.text(normalizeText("Imie / Ksywka:"), 20, 38);
       doc.text(charName, 55, 38);
-      doc.text(normalizeText("Koncept Postaci:"), 20, 46);
-      doc.text(charConcept, 55, 46);
+
+      let currentY = 55;
       const col1X = 15;
       const col2X = 110;
+
       doc.setFontSize(16);
-      doc.text(normalizeText("Atrybuty"), col1X, 65);
-      doc.rect(col1X, 70, 85, 35);
+      doc.text(normalizeText("Atrybuty"), col1X, currentY);
+      doc.rect(col1X, currentY + 5, 85, 35);
       doc.setFontSize(12);
-      doc.text(normalizeText("Siła:"), col1X + 5, 78);
-      doc.text(normalizeText("Zręczność:"), col1X + 5, 86);
-      doc.text(normalizeText("Spryt:"), col1X + 5, 94);
-      doc.text(normalizeText("Charyzma:"), col1X + 5, 102);
-      doc.text(`+${attrs.sila}`, col1X + 35, 78);
-      doc.text(`+${attrs.zrecznosc}`, col1X + 35, 86);
-      doc.text(`+${attrs.spryt}`, col1X + 35, 94);
-      doc.text(`+${attrs.charyzma}`, col1X + 35, 102);
+      doc.text(normalizeText("Sila:"), col1X + 5, currentY + 13);
+      doc.text(normalizeText("Zrecznosc:"), col1X + 5, currentY + 21);
+      doc.text(normalizeText("Spryt:"), col1X + 5, currentY + 29);
+      doc.text(normalizeText("Charyzma:"), col1X + 5, currentY + 37);
+      doc.text(`+${attrs.sila}`, col1X + 35, currentY + 13);
+      doc.text(`+${attrs.zrecznosc}`, col1X + 35, currentY + 21);
+      doc.text(`+${attrs.spryt}`, col1X + 35, currentY + 29);
+      doc.text(`+${attrs.charyzma}`, col1X + 35, currentY + 37);
+
       doc.setFontSize(16);
-      doc.text(normalizeText("Cechy Bojowe"), col2X, 65);
-      doc.rect(col2X, 70, 85, 35);
+      doc.text(normalizeText("Cechy Bojowe"), col2X, currentY);
+      doc.rect(col2X, currentY + 5, 85, 35);
       doc.setFontSize(12);
-      doc.text(normalizeText("Punkty Fartu (PF):"), col2X + 5, 78);
-      doc.text(normalizeText("Obrona:"), col2X + 5, 86);
-      doc.text(normalizeText("Próg Bólu:"), col2X + 5, 94);
-      doc.text(normalizeText("Punkty Brawury:"), col2X + 5, 102);
-      doc.text(stats.pf, col2X + 50, 78);
-      doc.text(stats.obrona, col2X + 50, 86);
-      doc.text(stats.progBolu, col2X + 50, 94);
-      doc.text("3", col2X + 50, 102);
+      doc.text(normalizeText("Punkty Fartu (PF):"), col2X + 5, currentY + 13);
+      doc.text(normalizeText("Obrona:"), col2X + 5, currentY + 21);
+      doc.text(normalizeText("Prog Bolu:"), col2X + 5, currentY + 29);
+      doc.text(normalizeText("Punkty Brawury:"), col2X + 5, currentY + 37);
+      doc.text(stats.pf, col2X + 55, currentY + 13);
+      doc.text(stats.obrona, col2X + 55, currentY + 21);
+      doc.text(stats.progBolu, col2X + 55, currentY + 29);
+      doc.text("3", col2X + 55, currentY + 37);
+
+      currentY += 55;
+
       doc.setFontSize(16);
-      doc.text(normalizeText("Umiejętności"), col1X, 120);
-      doc.rect(col1X, 125, 180, 100);
+      doc.text(normalizeText("Umiejetnosci"), col1X, currentY);
+      const skillsBoxHeight = 80;
+      doc.rect(col1X, currentY + 5, 180, skillsBoxHeight);
       doc.setFontSize(10);
-      let yPos = 132;
+
+      let yPos = currentY + 12;
       let currentX = col1X + 5;
       const columnWidth = 45;
+
       skillInputs.forEach((input) => {
         const skillValue = parseInt(input.value);
         if (skillValue > 0) {
           const skillName = normalizeText(input.dataset.skill);
           doc.text(`${skillName}: +${skillValue}`, currentX, yPos);
           yPos += 7;
-          if (yPos > 220) {
-            yPos = 132;
+          if (yPos > currentY + skillsBoxHeight) {
+            yPos = currentY + 12;
             currentX += columnWidth;
           }
         }
       });
+
+      currentY += skillsBoxHeight + 20;
+
       doc.setFontSize(16);
-      doc.text(normalizeText("Ekwipunek i Notatki"), col1X, 240);
-      doc.rect(col1X, 245, 180, 40);
+      doc.text(normalizeText("Ekwipunek i Notatki"), col1X, currentY);
+      doc.rect(col1X, currentY + 5, 180, 40);
       doc.setLineDashPattern([1, 1], 0);
-      doc.line(col1X + 5, 255, 190, 255);
-      doc.line(col1X + 5, 265, 190, 265);
-      doc.line(col1X + 5, 275, 190, 275);
+      doc.line(col1X + 5, currentY + 15, 190, currentY + 15);
+      doc.line(col1X + 5, currentY + 25, 190, currentY + 25);
+      doc.line(col1X + 5, currentY + 35, 190, currentY + 35);
+
+      // --- STRONA 2: OPIS POSTACI ---
+      doc.addPage();
+      doc.setFontSize(18);
+      doc.text(normalizeText("Historia i Koncept Postaci"), 15, 20);
+      doc.setLineWidth(0.5);
+      doc.line(15, 23, 195, 23);
+
+      doc.setFontSize(12);
+      const conceptLinesPage2 = doc.splitTextToSize(charConcept, 180); // Szersze pole tekstowe
+      doc.text(conceptLinesPage2, 15, 35);
+
       doc.save(`${charName.replace(/\s/g, "_")}_karta.pdf`);
     });
+
   populateAttributeOptions();
   updateSkillPoints();
 });

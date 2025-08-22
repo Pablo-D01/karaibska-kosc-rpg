@@ -306,3 +306,10 @@ input[type="number"] {
 #main-content {
   display: none;
 }
+/* Dodatkowe style dla auto-rozszerzającej się textarea */
+textarea {
+  resize: vertical;
+  overflow-y: hidden;
+  min-height: 40px; /* Minimalna wysokość */
+  line-height: 1.5;
+}
