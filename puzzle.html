@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Karaibska Kość - Tajemnicza Skrzynia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .puzzle-container {
+        text-align: center;
+      }
+      .chest-image {
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 30 H 90 V 70 H 10 Z" fill="%235a3e2b" stroke="%23c8b7a6" stroke-width="2"/><path d="M10 30 Q 50 10, 90 30" fill="%235a3e2b" stroke="%23c8b7a6" stroke-width="2"/><rect x="45" y="45" width="10" height="10" fill="%23c8b7a6"/><line x1="5" y1="50" x2="95" y2="50" stroke="%23c8b7a6" stroke-width="4"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+      }
+      .lock {
+        position: absolute;
+        font-size: 2em;
+        color: #c8b7a6;
+        text-shadow: 1px 1px 2px black;
+      }
+      #lock1 {
+        top: 55%;
+        left: 20%;
+      }
+      #lock2 {
+        top: 55%;
+        left: 45%;
+      }
+      #lock3 {
+        top: 55%;
+        right: 20%;
+      }
+      .unlocked {
+        color: #28a745;
+      }
+
+      .riddle {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #c8b7a6;
+        border-radius: 5px;
+        background-color: rgba(200, 183, 166, 0.1);
+      }
+      .riddle-text {
+        font-size: 1.2em;
+        font-style: italic;
+        margin-bottom: 15px;
+      }
+      #answer-input {
+        margin-right: 10px;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Tajemnicza Skrzynia Przemytnika</h1>
+        <a href="index.html" class="back-link">← Powrót do strony głównej</a>
+      </header>
+      <main class="puzzle-container">
+        <p>
+          Na progu tawerny znajdujecie ciężką, okutą żelazem skrzynię. Wydaje
+          się opuszczona. Na wieku widnieje grawerunek...
+        </p>
+        <div class="chest-image">
+          <span id="lock1" class="lock">🔒</span>
+          <span id="lock2" class="lock">🔒</span>
+          <span id="lock3" class="lock">🔒</span>
+        </div>
+
+        <div id="riddle-container" class="riddle">
+          <p class="riddle-text" id="riddle-text-area"></p>
+          <input
+            type="text"
+            id="answer-input"
+            placeholder="Wpisz odpowiedź..."
+          />
+          <button
+            id="submit-answer"
+            class="nav-button"
+            style="display: inline-block; width: auto"
+          >
+            Odpowiedz
+          </button>
+        </div>
+
+        <div id="success-message" class="riddle hidden">
+          <h2>Skrzynia Otwarta!</h2>
+          <p>W środku znajdujecie pożółkły zwój pergaminu. Czytacie:</p>
+          <p class="riddle-text">
+            "Kto ma dość sprytu, by otworzyć tę skrzynię, zasługuje na łut
+            szczęścia. Pokażcie ten zwój barmanowi, a postawi wam pierwszą
+            kolejkę i dorzuci coś ekstra od siebie..."
+          </p>
+          <p>
+            <strong
+              >(Na początku sesji Wasza drużyna otrzymuje dodatkowy, wspólny
+              Punkt Brawury!)</strong
+            >
+          </p>
+        </div>
+      </main>
+    </div>
+    <script src="js/puzzle.js"></script>
+  </body>
+</html>
