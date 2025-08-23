@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       question:
-        "Czas ci ucieka",
+        "Czas ci ucieka - podpowiedź to miejscowość przez którą jechaliśmy dzisiaj",
       answer: "ŚWIECA",
     },
   ];
