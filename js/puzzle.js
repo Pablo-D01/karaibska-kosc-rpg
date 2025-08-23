@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       question:
-        "Jestem zawsze głodna, muszę być karmiona. Palec, który mnie dotknie, wkrótce zapłonie. Czym jestem?",
+        "Czas ci ucieka",
       answer: "ŚWIECA",
     },
   ];
